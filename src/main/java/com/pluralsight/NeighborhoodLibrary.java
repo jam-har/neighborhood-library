@@ -21,6 +21,14 @@ public class NeighborhoodLibrary {
             System.out.println("3 - Exit");
 
             int command = user.nextInt();
+            switch (command) {
+                case 1 -> listAllBooks();
+                case 2 -> listCheckedBooks();
+                case 3 -> System.out.println("Goodbye!"); isDone = true;
+                default -> System.out.println("Error, please enter a numerical value matching the menu options.");
+            }
+
+
             /*            // Each option is its own method, so the loop stays short and easy to read.
             switch (command) {
                 case 1:
@@ -50,6 +58,14 @@ public class NeighborhoodLibrary {
             }*/
 
 
+        }
+
+    }
+
+    public static void listAllBooks() {
+        System.out.println("Library Inventory: ");
+        for (int i = 0; i < numberOfBooks; i++) {
+            System.out.println(books[i]);
         }
 
     }
