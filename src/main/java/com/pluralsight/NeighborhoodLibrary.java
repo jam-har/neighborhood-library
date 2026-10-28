@@ -1,6 +1,8 @@
 package com.pluralsight;
-private int numberOfBooks;
+import java.util.*;
 public class NeighborhoodLibrary {
+    private int numberOfBooks;
+    private static Book[] books = new Book[25];
     public static void main(String[] args) {
         /*menu:
         show available books:id, isbn, title- select to check out or exit
@@ -9,6 +11,46 @@ public class NeighborhoodLibrary {
             check in: prompt user for book id
         exit: return to menu
          */
+        Scanner user = new Scanner(System.in);
+        boolean isDone = false;
+
+        while(!isDone) {
+            System.out.println("Please select an option below (enter numerical values only): ");
+            System.out.println("1 - Show available books");
+            System.out.println("2 - Show checked out books");
+            System.out.println("3 - Exit");
+
+            int command = user.nextInt();
+            /*            // Each option is its own method, so the loop stays short and easy to read.
+            switch (command) {
+                case 1:
+                    listAllVehicles();
+                    break;
+                case 2:
+                    findVehiclesByMakeModel(scanner);
+                    break;
+                case 3:
+                    findVehiclesByPrice(scanner);
+                    break;
+                case 4:
+                    findVehiclesByColor(scanner);
+                    break;
+                case 5:
+                    addVehicle(scanner);
+                    break;
+                case 6:
+                    // Display a message to the user and exit the program.
+                    System.out.println("Goodbye!");
+                    isDone = true;
+                    break;
+                default:
+                    // Display an error message if the user inputs an invalid command.
+                    System.out.println("Invalid command.");
+                    break;
+            }*/
+
+
+        }
 
     }
 }
