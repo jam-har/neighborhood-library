@@ -40,7 +40,6 @@ public class NeighborhoodLibrary {
          */
         Scanner user = new Scanner(System.in);
         boolean isDone = false;
-
         while(!isDone) {
             System.out.println("Please select an option below (enter numerical values only): ");
             System.out.println("1 - Show available books");
@@ -49,24 +48,19 @@ public class NeighborhoodLibrary {
 
             int command = user.nextInt();
             switch (command) {
-                case 1 -> {
-                    user.nextLine();
-                    listAvailableBooks(user);
-                    //case 2 -> listCheckedBooks();
-                /*case 3 -> {
+                case 1 -> listAvailableBooks(user);
+                case 2 -> listCheckedBooks(user);
+                case 3 -> {
                     System.out.println("Goodbye!");
-                }
-                    isDone = true;*/
-                }
+                    isDone = true;
+                    }
                 default -> System.out.println("Error, please enter a numerical value matching the menu options.");
-            }
-
-
-
-
-        }
+           }/* could not properly implement try-catch because it gave same message for all methods in the loop
+                System.out.println("Error, please enter a numerical value matching the menu options.");*/
 
     }
+
+}
 /*Show Available Books - Displays a list of all books that are not currently checked
 out. Display the Id, ISBN and Title of the book.
 o Prompt the user to either select a book to check out, or exit to go back to
@@ -74,27 +68,67 @@ the home screen
 o If the user wants to check out a book, prompt them for their name
 o Then check out the book*/
     public static void listAvailableBooks(Scanner user) {
-        System.out.println("Available titles");
+        user.nextLine();
+        System.out.println("Available titles: ");
         int i;
         for (i = 0; i < numberOfBooks; i++) {
             if (!books[i].isCheckedOut()) {
                 System.out.println(i + " | " + books[i].getId() + " | " + books[i].getIsbn() + " | " + books[i].getTitle());
             }
         }
-            System.out.println("Please select a title to check out or press X to return ");
+            System.out.println("Please select a title to check out or press X to return to the main menu.");
             String option = user.nextLine();
             if (option.equalsIgnoreCase("x")) {
                 return;
             }
             i = Integer.parseInt(option);
-            //if (option == String.valueOf(books[i])) {
+            if (i > 0 && i < numberOfBooks) {
                 System.out.println("Please enter your name");
                 String name = user.nextLine();
+                books[i].setCheckedOutTo(name);
                 books[i].checkOut(name);
-            //}
+                System.out.println("Congratulations, " + name + "! You have now checked out " + books[i].getTitle() + ".");
+            } else {
+                System.out.println("Error. Book cannot be found, please enter a selection from numbers 1 - " + numberOfBooks + ". (Press enter to retry.)");
+                listAvailableBooks(user); // wanted while loop instead of if-else but unsure of how to do that with this
+            }
+    }
+    public static void listCheckedBooks(Scanner user) {
+        /*• Show Checked Out Books - This displays a list of all the books that are currently
+checked out. Display the Id, ISBN, Title and Name of the person who has the book
+checked out. Prompt the user to:
+o C - to Check In a book
+o X - to go back to the home screen
+ Check In a book - Prompt the user for the Id of the book they want to check in.
+o Check in the book with the specified Id
+o Go back to the home screen*/
+        user.nextLine();
+        System.out.println("Titles currently checked out: ");
+        int i;
+        for (i = 0; i < numberOfBooks; i++) {
+            if (books[i].isCheckedOut()) {
+                System.out.println(books[i].getId() + " | " + books[i].getIsbn() + " | " +
+                        books[i].getTitle() + books[i].getCheckedOutTo());
+            }
+        }
+        System.out.println("Please press C to check in a book or X to return to the main menu.");
+        String option = user.nextLine();
+        if (option.equalsIgnoreCase("x")) {
+            return;
+        } else if (option.equalsIgnoreCase("c")) {
+            System.out.println("Please enter book ID");
 
+        } else {
+            System.out.println("Error occurred. Please try again. (Press enter to continue).");
+        }
+        int id = user.nextInt();
+        for (i = 0; i < numberOfBooks; i++) {
+            if (id == books[i].getId()) {
+                books[i].checkIn();
+                System.out.println("Thank you for returning your book; hope you enjoyed!");
 
-
+            }
+        }
 
     }
 }
