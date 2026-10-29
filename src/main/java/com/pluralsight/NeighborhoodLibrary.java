@@ -4,6 +4,32 @@ public class NeighborhoodLibrary {
     private int numberOfBooks;
     private static Book[] books = new Book[25];
     public static void main(String[] args) {
+        //Book(int id, String isbn, String title, boolean isCheckedOut, String checkedOutTo)
+        books[0] = new Book(1234, "9780374279127", "Tree of Smoke", false, "");
+        books[1] = new Book(1235, "9780375424106", "How to be Both", false, "");
+        books[2] = new Book(1236, "0060188731", "Bel Canto", false, "");
+        books[3] = new Book(1237, "1608197654", "Men We Reaped", false, "");
+        books[4] = new Book(1238, "9780393285673", "Wayward Lives, Beautiful Experiments", false, "");
+        books[5] = new Book(1239, "9780805090031", "Bring Up the Bodies", false, "");
+        books[6] = new Book(1230, "1594200637", "On Beauty", false, "");
+        books[7] = new Book(1231, "0385353308", "Station Eleven", false, "");
+        books[8] = new Book(1232, "1933372001", "The Days of Abandonment", false, "");
+        books[9] = new Book(1233, "0618059458", "The Human Stain", false, "");
+        books[10] = new Book(4321, "0802123457", "The Sympathizer", false, "");
+        books[11] = new Book(4322, "9780812994827", "The Return", false, "");
+        books[12] = new Book(4323, "9780374270605", "The Collected Stories of Lydia Davis", false, "");
+        books[13] = new Book(4324, "97880593133378", "Detransition, Baby", false, "");
+        books[14] = new Book(4325, "9781465903116", "Frederick Douglass", false, "");
+        books[15] = new Book(4326, "9781439107959", "Pastoralia", false, "");
+        books[16] = new Book(4327, "9781681375663", "When We Cease to Understand the World", false, "");
+        books[17] = new Book(4328, "9780811228039", "Hurricane Season", false, "");
+        books[18] = new Book(4329, "9780374532901", "Pulphead", false, "");
+        books[19] = new Book(4320, "9780374202392", "A Manual for Cleaning Women", false, "");
+
+
+
+
+
         /*menu:
         show available books:id, isbn, title- select to check out or exit
             check out: enter name
