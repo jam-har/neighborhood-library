@@ -1,8 +1,9 @@
 package com.pluralsight;
 import java.util.*;
 public class NeighborhoodLibrary {
-    private int numberOfBooks;
+    private static int numberOfBooks = 20;
     private static Book[] books = new Book[25];
+    Scanner user = new Scanner(System.in);
     public static void main(String[] args) {
         //Book(int id, String isbn, String title, boolean isCheckedOut, String checkedOutTo)
         books[0] = new Book(1234, "9780374279127", "Tree of Smoke", false, "");
@@ -48,51 +49,52 @@ public class NeighborhoodLibrary {
 
             int command = user.nextInt();
             switch (command) {
-                case 1 -> listAllBooks();
-                case 2 -> listCheckedBooks();
-                case 3 -> System.out.println("Goodbye!"); isDone = true;
+                case 1 -> {
+                    user.nextLine();
+                    listAvailableBooks(user);
+                    //case 2 -> listCheckedBooks();
+                /*case 3 -> {
+                    System.out.println("Goodbye!");
+                }
+                    isDone = true;*/
+                }
                 default -> System.out.println("Error, please enter a numerical value matching the menu options.");
             }
 
 
-            /*            // Each option is its own method, so the loop stays short and easy to read.
-            switch (command) {
-                case 1:
-                    listAllVehicles();
-                    break;
-                case 2:
-                    findVehiclesByMakeModel(scanner);
-                    break;
-                case 3:
-                    findVehiclesByPrice(scanner);
-                    break;
-                case 4:
-                    findVehiclesByColor(scanner);
-                    break;
-                case 5:
-                    addVehicle(scanner);
-                    break;
-                case 6:
-                    // Display a message to the user and exit the program.
-                    System.out.println("Goodbye!");
-                    isDone = true;
-                    break;
-                default:
-                    // Display an error message if the user inputs an invalid command.
-                    System.out.println("Invalid command.");
-                    break;
-            }*/
 
 
         }
 
     }
-
-    public static void listAllBooks() {
-        System.out.println("Library Inventory: ");
-        for (int i = 0; i < numberOfBooks; i++) {
-            System.out.println(books[i]);
+/*Show Available Books - Displays a list of all books that are not currently checked
+out. Display the Id, ISBN and Title of the book.
+o Prompt the user to either select a book to check out, or exit to go back to
+the home screen
+o If the user wants to check out a book, prompt them for their name
+o Then check out the book*/
+    public static void listAvailableBooks(Scanner user) {
+        System.out.println("Available titles");
+        int i;
+        for (i = 0; i < numberOfBooks; i++) {
+            if (!books[i].isCheckedOut()) {
+                System.out.println(i + " | " + books[i].getId() + " | " + books[i].getIsbn() + " | " + books[i].getTitle());
+            }
         }
+            System.out.println("Please select a title to check out or press X to return ");
+            String option = user.nextLine();
+            if (option.equalsIgnoreCase("x")) {
+                return;
+            }
+            i = Integer.parseInt(option);
+            //if (option == String.valueOf(books[i])) {
+                System.out.println("Please enter your name");
+                String name = user.nextLine();
+                books[i].checkOut(name);
+            //}
+
+
+
 
     }
 }
