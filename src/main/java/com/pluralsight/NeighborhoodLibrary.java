@@ -124,14 +124,19 @@ o Go back to the home screen*/
             return;
         }
         int id = user.nextInt();
+        boolean found = false;
         for (i = 0; i < numberOfBooks; i++) {
             if (id == books[i].getId()) {
                 String name = books[i].getCheckedOutTo();
                 books[i].checkIn();
                 System.out.println("Thank you for returning your book, " + name + "! We hope you enjoyed it!");
-
-
+                found = true;
             }
+        }
+        if (!found) {
+            System.out.println("Error: book not found. Please try again. (Press enter to continue).");
+            listCheckedBooks(user);
+            return;
         }
 
     }
