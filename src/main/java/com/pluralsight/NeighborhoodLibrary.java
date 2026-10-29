@@ -69,7 +69,7 @@ o If the user wants to check out a book, prompt them for their name
 o Then check out the book*/
     public static void listAvailableBooks(Scanner user) {
         user.nextLine();
-        System.out.println("Available titles: ");
+        System.out.println("Available titles (Selection | ID | ISBN | Title) ");
         int i;
         for (i = 0; i < numberOfBooks; i++) {
             if (!books[i].isCheckedOut()) {
@@ -82,7 +82,7 @@ o Then check out the book*/
                 return;
             }
             i = Integer.parseInt(option);
-            if (i > 0 && i < numberOfBooks) {
+            if (i >= 0 && i < numberOfBooks) {
                 System.out.println("Please enter your name");
                 String name = user.nextLine();
                 books[i].setCheckedOutTo(name);
@@ -103,29 +103,33 @@ o X - to go back to the home screen
 o Check in the book with the specified Id
 o Go back to the home screen*/
         user.nextLine();
-        System.out.println("Titles currently checked out: ");
+        System.out.println("Titles currently checked out (ID | ISBN | Title | Neighbor with book)");
         int i;
         for (i = 0; i < numberOfBooks; i++) {
             if (books[i].isCheckedOut()) {
                 System.out.println(books[i].getId() + " | " + books[i].getIsbn() + " | " +
-                        books[i].getTitle() + books[i].getCheckedOutTo());
+                        books[i].getTitle() + " | " + books[i].getCheckedOutTo());
             }
         }
         System.out.println("Please press C to check in a book or X to return to the main menu.");
         String option = user.nextLine();
         if (option.equalsIgnoreCase("x")) {
-            return;
-        } else if (option.equalsIgnoreCase("c")) {
+           return;
+        }
+        if (option.equalsIgnoreCase("c")) {
             System.out.println("Please enter book ID");
-
         } else {
             System.out.println("Error occurred. Please try again. (Press enter to continue).");
+            listCheckedBooks(user);
+            return;
         }
         int id = user.nextInt();
         for (i = 0; i < numberOfBooks; i++) {
             if (id == books[i].getId()) {
+                String name = books[i].getCheckedOutTo();
                 books[i].checkIn();
-                System.out.println("Thank you for returning your book; hope you enjoyed!");
+                System.out.println("Thank you for returning your book, " + name + "! We hope you enjoyed it!");
+
 
             }
         }
